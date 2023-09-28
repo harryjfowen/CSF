@@ -135,11 +135,7 @@ Cloth CSF::do_cloth() {
     int height_num = static_cast<int>(
         std::floor((bbMax.z - bbMin.z) / params.cloth_resolution)
     ) + 2 * clothbuffer_d;
-
-    std::cout << "[" << this->index << "] Configuring cloth..." << std::endl;
-    std::cout << "[" << this->index << "]  - width: " << width_num << " "
-         << "height: " << height_num << std::endl;
-
+	
     Cloth cloth(
         origin_pos,
         width_num,
@@ -152,13 +148,11 @@ Cloth CSF::do_cloth() {
         params.time_step
     );
 
-    std::cout << "[" << this->index << "] Rasterizing..." << std::endl;
     Rasterization::RasterTerrian(cloth, point_cloud, cloth.getHeightvals());
 
     double time_step2 = params.time_step * params.time_step;
     double gravity    = 0.2;
 
-    std::cout << "[" << this->index << "] Simulating..." << std::endl;
     cloth.addForce(Vec3(0, -gravity, 0) * time_step2);
 
     // boost::progress_display pd(params.interations);
@@ -174,7 +168,6 @@ Cloth CSF::do_cloth() {
     }
 
     if (params.bSloopSmooth) {
-        std::cout << "[" << this->index << "]  - post handle..." << std::endl;
         cloth.movableFilter();
     }
 
