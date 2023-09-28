@@ -115,7 +115,6 @@ void CSF::readPointsFromFile(std::string filename) {
 
 Cloth CSF::do_cloth() {
     // Terrain
-    std::cout << "[" << this->index << "] Configuring terrain..." << std::endl;
     csf::Point bbMin, bbMax;
     point_cloud.computeBoundingBox(bbMin, bbMax);
 
